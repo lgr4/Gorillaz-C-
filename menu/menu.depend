@@ -1,0 +1,13 @@
+# depslib dependency file v1.0
+1676740111 source:c:\users\lucas\onedrive\documentos\github\gorillaz-c-\menu\main.c
+	<stdio.h>
+	<string.h>
+	<curses.h>
+
+1675799391 c:\codeblocks\pdcurs33\curses.h
+	<stdarg.h>
+	<stddef.h>
+	<stdio.h>
+	<wchar.h>
+	<stdbool.h>
+
