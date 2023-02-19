@@ -2,25 +2,31 @@
 #include <string.h>
 #include <curses.h>
 
-int main()
+void main()
 {
     initscr();
     keypad(stdscr, true); //Para o programa reconhecer as setas do teclado.
 
-    char menu[3][100] = {"Jogo", "Dificuldades", "Sair"}; //Criando o menu.
+    char menu[4][100] = {"Jogo", "Dificuldades", "Ranking", "Sair"}; //Criando o menu.
+
+    char continuar[2][100] = {"Continuar", "Sair"};
 
     char difficulties[3][100] = {"Easy", "Intermediate", "Hard"}; //Criando as opções de dificuldades.
 
-    int y, x, j, opcao, opcao1, marcador = 0, marcador1 = 0, fim = 0, pontos = 0;
+    int y, x, j, opcao, opcao1, marcador = 0, marcador1 = 0, fim = 0, opcao2, marcador2 = 0;
 
     char macaco = '@';
+
+    char jogadores[6][100];
+    int pontuacao[6];
+    int contadores = 0;
 
     getmaxyx(stdscr, y, x);
 
     do{
 
         do{
-            for(j = 0; j < 3; j++){
+            for(j = 0; j < 4; j++){
                 if(j == marcador){
                     attron(A_REVERSE); //Deixa a cor da ocpao diferente.
                 }
@@ -38,7 +44,7 @@ int main()
 
             if(marcador == -1){
                 marcador = 2;
-            } else if(marcador == 3){
+            } else if(marcador == 4){
                 marcador = 0;
             }
 
@@ -49,115 +55,178 @@ int main()
         switch(marcador){
             case 0: //Jogo
 
-                getmaxyx(stdscr, y, x);
-
-                WINDOW * vel1win = newwin(3, 20, 0, 0); //Cria os espaços onde o usuário vai digitar as informações.
-                refresh();
-
-                box(vel1win, 0, 0);
-                mvwprintw(vel1win, 1,2, "Velocity:");
-                wrefresh(vel1win);
-
-                WINDOW * ang1win = newwin(3, 15, 0, 22);
-                refresh();
-
-                box(ang1win, 0, 0);
-                mvwprintw(ang1win, 1,2, "Angle:");
-                wrefresh(ang1win);
-
-                mvprintw(1, x/2 - strlen("Points")/2, "Points: %d", pontos);
-
-                WINDOW * ang2win = newwin(3, 15, 0, x-15);
-                refresh();
-
-                box(ang2win, 0, 0);
-                mvwprintw(ang2win, 1,2, "Angle:");
-                wrefresh(ang2win);
-
-                WINDOW * vel2win = newwin(3, 20, 0, x-38);
-                refresh();
-
-                box(vel2win, 0, 0);
-                mvwprintw(vel2win, 1,2, "Velocity:");
-                wrefresh(vel2win);
-
-                int vel1 = mvwscanw(vel1win, 1,12, "%d", &vel1); //Solicita as informações ao usuário.
-                int ang1 = mvwscanw(ang1win, 1, 9, "%d", &ang1);
-                int vel2 = mvwscanw(vel2win, 1,12, "%d", &vel2);
-                int ang2 = mvwscanw(ang2win, 1, 9, "%d", &ang2);
-
-                mvprintw(y/2, x/2 - strlen("Pressione uma tecla para continuar...")/2,"Pressione uma tecla para continuar...");
-
-                getch();
+                mvprintw(y/2, x/2 - 11, "Digite seu nome: ");
+                scanw("%s", &jogadores[contadores]);
+                pontuacao[contadores] = 0;
 
                 clear();
 
-                //Jogo:
+                do {
 
-                /*
+                    WINDOW * vel1win = newwin(3, 20, 0, 0); //Cria os espaços onde o usuário vai digitar as informações.
+                    refresh();
 
-                switch (marcador1) {
-                    case 1: //Dificuldade fácil:
-                }
+                    box(vel1win, 0, 0);
+                    mvwprintw(vel1win, 1,2, "Velocity:");
+                    wrefresh(vel1win);
 
-                //O codigo do jogo a seguir deve ser colocado em cada switch: case 1 = nivel facil, case 2 = medio, ...
+                    WINDOW * ang1win = newwin(3, 15, 0, 22);
+                    refresh();
 
-                WINDOW * jogowin = newwin(y, x, 0, 0);
-                refresh();
+                    box(ang1win, 0, 0);
+                    mvwprintw(ang1win, 1,2, "Angle:");
+                    wrefresh(ang1win);
 
-                //Cria o espaço do jogo.
+                    mvprintw(1, x/2 - strlen("Points")/2, "Points: %d", pontuacao[contadores]);
 
-                box(jogowin, 0, 0);
+                    WINDOW * ang2win = newwin(3, 15, 0, x-15);
+                    refresh();
 
-                mvwprintw(jogowin, y/2 + 9, 4, "@");
-                mvwprintw(jogowin, y/2 + 9, x-6, "@");
+                    box(ang2win, 0, 0);
+                    mvwprintw(ang2win, 1,2, "Angle:");
+                    wrefresh(ang2win);
 
-                mvwprintw(jogowin, y/2 + 10, 3, "%s", macaco);
-                mvwprintw(jogowin, y/2 + 10, x-5, "%s", macaco);
+                    WINDOW * vel2win = newwin(3, 20, 0, x-38);
+                    refresh();
 
-                wrefresh(jogowin);
+                    box(vel2win, 0, 0);
+                    mvwprintw(vel2win, 1,2, "Velocity:");
+                    wrefresh(vel2win);
 
-                //Lançamento da primeira banana.
+                    float vel1 = mvwscanw(vel1win, 1,12, "%d", &vel1); //Solicita as informações ao usuário.
+                    float ang1 = mvwscanw(ang1win, 1, 9, "%d", &ang1);
+                    float vel2 = mvwscanw(vel2win, 1,12, "%d", &vel2);
+                    float ang2 = mvwscanw(ang2win, 1, 9, "%d", &ang2);
 
-                do{
+                    clear();
 
-                    wclear(jogowin);
+                    //Jogo:
 
-                    x1 += 1;
-                    y1 -= 1;
+                    /*
+
+                    switch (marcador1) {
+                        case 1: //Dificuldade fácil:
+                    }
+
+                    //O codigo do jogo a seguir deve ser colocado em cada switch: case 1 = nivel facil, case 2 = medio, ...
+
+                    WINDOW * jogowin = newwin(y, x, 0, 0);
+                    refresh();
+
+                    //Cria o espaço do jogo.
 
                     box(jogowin, 0, 0);
 
-                    mvwprintw(jogowin, y/2 + 10, 3, "%s", macacoD);
-                    mvwprintw(jogowin, y/2 + 10, x-5, "%s", macacoD);
+                    mvwprintw(jogowin, y/2 + 9, 4, "@");
+                    mvwprintw(jogowin, y/2 + 9, x-6, "@");
 
-                    mvwprintw(jogowin, y/2 + 9 + y1, x1, "%@");
-                    mvwprintw(jogowin, y/2 + 9, x - 6, "%@");
-
+                    mvwprintw(jogowin, y/2 + 10, 3, "%s", macaco);
+                    mvwprintw(jogowin, y/2 + 10, x-5, "%s", macaco);
 
                     wrefresh(jogowin);
 
-                    t += 1;
+                    //Lançamento da primeira banana.
 
-                    getch();
+                    do{
+                        if (x1 >= x - 6 || y1 >= y){
+                            break;
+                        }
 
-                } while (t < 10);
+                        wclear(jogowin);
 
-                //Pontuação do primeiro lancamento:
+                        box(jogowin, 0, 0);
 
-                if((x1 == x - 5 && y1 = y/2 +10) || (x1 == x - 6 && y1 = y/2 +9)){
-                    pontos += 100;
-                }
+                        mvwprintw(jogowin, y/2 + 10, 3, "%s", macaco);
+                        mvwprintw(jogowin, y/2 + 10, x-5, "%s", macaco);
+
+                        x1 += vel1*cos(rad1)*t;
+                        y1 = y/2 + 9 + ( - x1*tan(rad1)*t + 9.81*x1*x1/(2*vel1*vel1*cos(rad1)*cos(rad1)))/4;
+                        //Dividido por 4 porque temos apenas 30 casas na vertical.
+
+                        mvwprintw(jogowin, y1, x1, "@");
+                        mvwprintw(jogowin, y/2+9, x-6, "@");
+
+                        wrefresh(jogowin);
+
+                        t += 0.5;
+
+                        sleep(1);
+
+                    } while (true);
+
+                    //Pontuação do primeiro lancamento:
+
+                    if((x1 == x - 5 && y1 = y/2 +10) || (x1 == x - 6 && y1 = y/2 +9)){
+                        pontos += 100;
+                    }
+
+                    do{
+                        if (x2 <= 4 || y2 >= y){
+                            break;
+                        }
+
+                        wclear(jogowin);
+
+                        box(jogowin, 0, 0);
+
+                        mvwprintw(jogowin, y/2 + 10, 3, "%s", macaco);
+                        mvwprintw(jogowin, y/2 + 10, x-5, "%s", macaco);
+
+                        x2 -= vel2*cos(rad2)*t;
+                        y2 = y/2 + 9 + ( - x2*tan(rad2)*t + 9.81*x2*x2/(2*vel2*vel2*cos(rad2)*cos(rad2)))/4;
+                        //Dividido por 4 porque temos apenas 30 casas na vertical.
+
+                        mvwprintw(jogowin, y/2 + 9, 4, "@");
+                        mvwprintw(jogowin, y2, x2, "@");
+
+                        wrefresh(jogowin);
+
+                        t += 0.5;
+
+                        sleep(1);
+
+                    } while (true);
+
+                    //Pontuação do segundo lancamento:
+
+                    if((x1 == 3 && y1 == y/2 +10) || (x1 == 4 && y1 == y/2 +9)){
+                        pontos -= 100;
+                    }
+                    */
+
+                    clear();
+
+                    do{
+                        for(j = 0; j < 2; j++){
+                            if(j == marcador2){
+                                attron(A_REVERSE);
+                            }
+                            mvprintw(y/2  + j, x/2 - strlen(continuar[j])/2, "%s", continuar[j]);
+                            attroff(A_REVERSE);
+                        }
+
+                        opcao2 = getch();
+
+                        if (opcao2 == KEY_UP){
+                            marcador2--;
+                        } else if (opcao2 == KEY_DOWN){
+                            marcador2++;
+                        }
+
+                        if(marcador2 == -1){
+                            marcador2 = 1;
+                        } else if(marcador2 == 2){
+                            marcador2 = 0;
+                        }
+
+                    }while(opcao2 != 10);
+
+                    clear(); //Limpando a tela.
 
 
+                } while (marcador2 != 1);
 
-                //Pontuação do segundo lancamento:
-
-                if((x1 == 3 && y1 == y/2 +10) || (x1 == 4 && y1 == y/2 +9)){
-                    pontos -= 100;
-                }
-
-                getch();*/
+                contadores++;
 
                 break;
             case 1:
@@ -193,6 +262,23 @@ int main()
                 break;
 
             case 2:
+                clear();
+
+                mvprintw(y/2 - 3, x/2 - 10, "Jogador: (...) pontos.");
+
+                //Falta montar o codigo que organiza a pontuacao em ordem decrescente.
+
+                for(j = 0; j < contadores; j++){
+                    mvprintw(y/2 - 2 + j, x/2 - 10, "%s: %d pontos.", jogadores[j], pontuacao);
+                }
+
+                getch();
+
+                clear();
+
+                break;
+
+            case 3:
                 clear();
                 fim += 1;
                 break;
