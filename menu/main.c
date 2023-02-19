@@ -8,43 +8,46 @@ int main()
     keypad(stdscr, true); //Para o programa reconhecer as setas do teclado.
 
     char menu[3][100] = {"Jogo", "Dificuldades", "Sair"}; //Criando o menu.
-    int y,x, j, opcao, marcador = 0;
 
-    int pontos = 0; //Variáveis que serão utilizadas no jogo.
+    char difficulties[3][100] = {"Easy", "Intermediate", "Hard"}; //Criando as opções de dificuldades.
 
-    int* janela; //Ponteiros que serão usados para criar janela/janelas.
+    int y, x, j, opcao, opcao1, marcador = 0, marcador1 = 0, fim = 0, pontos = 0;
+
+    char macaco = '@';
 
     getmaxyx(stdscr, y, x);
 
     do{
-        for(j = 0; j < 3; j++){
-            if(j == marcador){
-                attron(A_REVERSE); //Deixa a cor da ocpao diferente.
+
+        do{
+            for(j = 0; j < 3; j++){
+                if(j == marcador){
+                    attron(A_REVERSE); //Deixa a cor da ocpao diferente.
+                }
+                mvprintw(y/2 - 1 + j, x/2 - strlen(menu[j])/2, "%s", menu[j]);
+                attroff(A_REVERSE);
             }
-            mvprintw(y/2 - 1 + j, x/2 - strlen(menu[j])/2, "%s", menu[j]);
-            attroff(A_REVERSE);
-        }
 
-        opcao = getch();
+            opcao = getch();
 
-        if (opcao == KEY_UP){
-            marcador--;
-        } else if (opcao == KEY_DOWN){
-            marcador++;
-        }
+            if (opcao == KEY_UP){
+                marcador--;
+            } else if (opcao == KEY_DOWN){
+                marcador++;
+            }
 
-        if(marcador == -1){
-            marcador = 2;
-        } else if(marcador == 3){
-            marcador = 0;
-        }
+            if(marcador == -1){
+                marcador = 2;
+            } else if(marcador == 3){
+                marcador = 0;
+            }
 
-    }while(opcao != 10);
+        }while(opcao != 10);
 
-    clear(); //Limpando a tela.
+        clear(); //Limpando a tela.
 
-    switch(marcador){
-        case 0: //Jogo
+        switch(marcador){
+            case 0: //Jogo
 
                 getmaxyx(stdscr, y, x);
 
@@ -89,25 +92,113 @@ int main()
 
                 clear();
 
-                WINDOW * jogowin = newwin(y, x, 0, 0); //Cria o espaço do jogo.
+                //Jogo:
+
+                /*
+
+                switch (marcador1) {
+                    case 1: //Dificuldade fácil:
+                }
+
+                //O codigo do jogo a seguir deve ser colocado em cada switch: case 1 = nivel facil, case 2 = medio, ...
+
+                WINDOW * jogowin = newwin(y, x, 0, 0);
                 refresh();
 
+                //Cria o espaço do jogo.
+
                 box(jogowin, 0, 0);
+
+                mvwprintw(jogowin, y/2 + 9, 4, "@");
+                mvwprintw(jogowin, y/2 + 9, x-6, "@");
+
+                mvwprintw(jogowin, y/2 + 10, 3, "%s", macaco);
+                mvwprintw(jogowin, y/2 + 10, x-5, "%s", macaco);
+
                 wrefresh(jogowin);
 
-                getch();
+                //Lançamento da primeira banana.
+
+                do{
+
+                    wclear(jogowin);
+
+                    x1 += 1;
+                    y1 -= 1;
+
+                    box(jogowin, 0, 0);
+
+                    mvwprintw(jogowin, y/2 + 10, 3, "%s", macacoD);
+                    mvwprintw(jogowin, y/2 + 10, x-5, "%s", macacoD);
+
+                    mvwprintw(jogowin, y/2 + 9 + y1, x1, "%@");
+                    mvwprintw(jogowin, y/2 + 9, x - 6, "%@");
+
+
+                    wrefresh(jogowin);
+
+                    t += 1;
+
+                    getch();
+
+                } while (t < 10);
+
+                //Pontuação do primeiro lancamento:
+
+                if((x1 == x - 5 && y1 = y/2 +10) || (x1 == x - 6 && y1 = y/2 +9)){
+                    pontos += 100;
+                }
+
+
+
+                //Pontuação do segundo lancamento:
+
+                if((x1 == 3 && y1 == y/2 +10) || (x1 == 4 && y1 == y/2 +9)){
+                    pontos -= 100;
+                }
+
+                getch();*/
 
                 break;
-        case 1:
-            clear();
-            printw("Voce escolheu Dificuldades!");
-            break;
+            case 1:
+                clear();
 
-        case 2:
-            clear();
-            printw("Voce escolheu Sair!");
-            break;
-    }
+                do{
+                    for(j = 0; j < 3; j++){
+                        if(j == marcador1){
+                            attron(A_REVERSE);
+                        }
+                        mvprintw(y/2 - 1 + j, x/2 - strlen(difficulties[j])/2, "%s", difficulties[j]);
+                        attroff(A_REVERSE);
+                    }
+
+                    opcao1 = getch();
+
+                    if (opcao1 == KEY_UP){
+                        marcador1--;
+                    } else if (opcao1 == KEY_DOWN){
+                        marcador1++;
+                    }
+
+                    if(marcador1 == -1){
+                        marcador1 = 2;
+                    } else if(marcador1 == 3){
+                        marcador1 = 0;
+                    }
+
+                }while(opcao1 != 10);
+
+                clear(); //Limpando a tela.
+
+                break;
+
+            case 2:
+                clear();
+                fim += 1;
+                break;
+        }
+
+    } while(fim != 1);
 
     getch();
     endwin();
