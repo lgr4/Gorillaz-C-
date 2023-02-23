@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <string.h>
 #include <curses.h>
-
+#include <stdbool.h>
 void main()
 {
     initscr();
