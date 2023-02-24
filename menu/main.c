@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <string.h>
 #include <curses.h>
-#include <stdbool.h>
+
 void main()
 {
     initscr();
@@ -114,6 +114,7 @@ void main()
                     switch (marcador1) {
                         case 1: //Dificuldade fácil:
                     }
+
                     */
 
                     //O codigo do jogo a seguir deve ser colocado em cada switch: case 1 = nivel facil, case 2 = medio, ...
