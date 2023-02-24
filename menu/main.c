@@ -103,7 +103,10 @@ void main()
                     mvwscanw(vel2win, 1,12, "%d", &vel2);
                     mvwscanw(ang2win, 1, 9, "%d", &ang2);
 
-                    float rad1 = 3.1415*ang1/180, rad2 = 3.1415*rad2/180;
+                    float rad1, rad2;
+
+                    rad1 = (3.1415*ang1)/180;
+                    rad2 = (3.1415*ang2)/180;
 
                     clear();
 
@@ -124,21 +127,21 @@ void main()
 
                     do{
 
-                        x1 = 4 + floor(t*vel1*cos(ang1));
+
+                        x1 = 4 + floor(t*vel1*cos(rad1));
                         y1 = y/2 + 9 - floor(t*vel1*cos(rad1)/2) + floor(3*t*t/2);
 
                         box(jogowin, 0, 0);
-                        mvwprintw(jogowin, 1,2, "Velocity:");
 
                         mvwprintw(jogowin, y/2 + 10, 3, "%c", macaco);
                         mvwprintw(jogowin, y/2 + 10, x-4, "%c", macaco);
 
                         mvwprintw(jogowin, y1, x1, "B");
-                        mvwprintw(jogowin, y/2 + 9, x - 4, "B");
+                        mvwprintw(jogowin, y/2 + 9, x - 5, "B");
 
                         wrefresh(jogowin);
 
-                        getch();
+                        sleep(1);
 
 
                         if (x1 >= x-4 || y1 > y){
@@ -160,11 +163,10 @@ void main()
 
                     do{
 
-                        x2 = x - 5 - floor(t*vel2*cos(ang2));
-                        y2 = y/2 + 9 - floor(t*vel1*cos(rad1)/2) + floor(3*t*t/2);
+                        x2 = x - 5 - floor(t*vel2*cos(rad2));
+                        y2 = y/2 + 9 - floor(t*vel2*cos(rad2)/2) + floor(3*t*t/2);
 
                         box(jogowin, 0, 0);
-                        mvwprintw(jogowin, 1,2, "Velocity:");
 
                         mvwprintw(jogowin, y/2 + 10, 3, "%c", macaco);
                         mvwprintw(jogowin, y/2 + 10, x-4, "%c", macaco);
@@ -174,7 +176,7 @@ void main()
 
                         wrefresh(jogowin);
 
-                        getch();
+                        sleep(1);
 
 
                         if (x2 <= 4 || y2 >= y){

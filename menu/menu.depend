@@ -1,5 +1,5 @@
 # depslib dependency file v1.0
-1676850576 source:c:\users\lucas\onedrive\documentos\github\gorillaz-c-\menu\main.c
+1677262494 source:c:\users\lucas\onedrive\documentos\github\gorillaz-c-\menu\main.c
 	<stdio.h>
 	<string.h>
 	<curses.h>
