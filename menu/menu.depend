@@ -11,3 +11,9 @@
 	<wchar.h>
 	<stdbool.h>
 
+1677157783 source:c:\users\joaov\documents\github\gorillaz-c-\menu\main.c
+	<stdio.h>
+	<string.h>
+	<curses.h>
+	<stdbool.h>
+
