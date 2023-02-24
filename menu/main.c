@@ -21,6 +21,8 @@ void main()
     int pontuacao[6];
     int contadores = 0;
 
+    int x1,x2,y1,y2, t = 0;
+
     getmaxyx(stdscr, y, x);
 
     do{
@@ -93,10 +95,15 @@ void main()
                     mvwprintw(vel2win, 1,2, "Velocity:");
                     wrefresh(vel2win);
 
-                    float vel1 = mvwscanw(vel1win, 1,12, "%d", &vel1); //Solicita as informações ao usuário.
-                    float ang1 = mvwscanw(ang1win, 1, 9, "%d", &ang1);
-                    float vel2 = mvwscanw(vel2win, 1,12, "%d", &vel2);
-                    float ang2 = mvwscanw(ang2win, 1, 9, "%d", &ang2);
+                    //Solicita as informações ao usuário.
+                    int vel1, ang1, vel2, ang2;
+
+                    mvwscanw(vel1win, 1,12, "%d", &vel1);
+                    mvwscanw(ang1win, 1, 9, "%d", &ang1);
+                    mvwscanw(vel2win, 1,12, "%d", &vel2);
+                    mvwscanw(ang2win, 1, 9, "%d", &ang2);
+
+                    float rad1 = 3.1415*ang1/180, rad2 = 3.1415*rad2/180;
 
                     clear();
 
@@ -107,92 +114,87 @@ void main()
                     switch (marcador1) {
                         case 1: //Dificuldade fácil:
                     }
+                    */
 
                     //O codigo do jogo a seguir deve ser colocado em cada switch: case 1 = nivel facil, case 2 = medio, ...
 
                     WINDOW * jogowin = newwin(y, x, 0, 0);
                     refresh();
 
-                    //Cria o espaço do jogo.
-
-                    box(jogowin, 0, 0);
-
-                    mvwprintw(jogowin, y/2 + 9, 4, "@");
-                    mvwprintw(jogowin, y/2 + 9, x-6, "@");
-
-                    mvwprintw(jogowin, y/2 + 10, 3, "%s", macaco);
-                    mvwprintw(jogowin, y/2 + 10, x-5, "%s", macaco);
-
-                    wrefresh(jogowin);
-
-                    //Lançamento da primeira banana.
-
                     do{
-                        if (x1 >= x - 6 || y1 >= y){
-                            break;
-                        }
 
-                        wclear(jogowin);
+                        x1 = 4 + floor(t*vel1*cos(ang1));
+                        y1 = y/2 + 9 - floor(t*vel1*cos(rad1)/2) + floor(3*t*t/2);
 
                         box(jogowin, 0, 0);
+                        mvwprintw(jogowin, 1,2, "Velocity:");
 
-                        mvwprintw(jogowin, y/2 + 10, 3, "%s", macaco);
-                        mvwprintw(jogowin, y/2 + 10, x-5, "%s", macaco);
+                        mvwprintw(jogowin, y/2 + 10, 3, "%c", macaco);
+                        mvwprintw(jogowin, y/2 + 10, x-4, "%c", macaco);
 
-                        x1 += vel1*cos(rad1)*t;
-                        y1 = y/2 + 9 + ( - x1*tan(rad1)*t + 9.81*x1*x1/(2*vel1*vel1*cos(rad1)*cos(rad1)))/4;
-                        //Dividido por 4 porque temos apenas 30 casas na vertical.
-
-                        mvwprintw(jogowin, y1, x1, "@");
-                        mvwprintw(jogowin, y/2+9, x-6, "@");
+                        mvwprintw(jogowin, y1, x1, "B");
+                        mvwprintw(jogowin, y/2 + 9, x - 4, "B");
 
                         wrefresh(jogowin);
 
-                        t += 0.5;
+                        getch();
 
-                        sleep(1);
 
-                    } while (true);
+                        if (x1 >= x-4 || y1 > y){
+                            t = 0;
+                            break;
+                        }
 
-                    //Pontuação do primeiro lancamento:
+                        t++;
 
-                    if((x1 == x - 5 && y1 = y/2 +10) || (x1 == x - 6 && y1 = y/2 +9)){
-                        pontos += 100;
+                        wclear(jogowin);
+
+                    } while(true);
+
+                    if(x1 == x - 5 && y1 == y/2 +10){
+                        pontuacao[contadores] += 100;
+                    } else if (x1 == x - 6 && y1 == y/2 +9){
+                        pontuacao[contadores] += 100;
                     }
 
                     do{
+
+                        x2 = x - 5 - floor(t*vel2*cos(ang2));
+                        y2 = y/2 + 9 - floor(t*vel1*cos(rad1)/2) + floor(3*t*t/2);
+
+                        box(jogowin, 0, 0);
+                        mvwprintw(jogowin, 1,2, "Velocity:");
+
+                        mvwprintw(jogowin, y/2 + 10, 3, "%c", macaco);
+                        mvwprintw(jogowin, y/2 + 10, x-4, "%c", macaco);
+
+                        mvwprintw(jogowin, y/2 + 9, 4, "B");
+                        mvwprintw(jogowin, y2, x2, "B");
+
+                        wrefresh(jogowin);
+
+                        getch();
+
+
                         if (x2 <= 4 || y2 >= y){
                             break;
                         }
 
+                        t++;
+
                         wclear(jogowin);
 
-                        box(jogowin, 0, 0);
-
-                        mvwprintw(jogowin, y/2 + 10, 3, "%s", macaco);
-                        mvwprintw(jogowin, y/2 + 10, x-5, "%s", macaco);
-
-                        x2 -= vel2*cos(rad2)*t;
-                        y2 = y/2 + 9 + ( - x2*tan(rad2)*t + 9.81*x2*x2/(2*vel2*vel2*cos(rad2)*cos(rad2)))/4;
-                        //Dividido por 4 porque temos apenas 30 casas na vertical.
-
-                        mvwprintw(jogowin, y/2 + 9, 4, "@");
-                        mvwprintw(jogowin, y2, x2, "@");
-
-                        wrefresh(jogowin);
-
-                        t += 0.5;
-
-                        sleep(1);
-
-                    } while (true);
+                    } while(true);
 
                     //Pontuação do segundo lancamento:
 
-                    if((x1 == 3 && y1 == y/2 +10) || (x1 == 4 && y1 == y/2 +9)){
-                        pontos -= 100;
+                    if(x1 == 3 && y1 == y/2 +10){
+                        pontuacao[contadores] -= 100;
+                    } else if (x1 == 4 && y1 == y/2 +9) {
+                        pontuacao[contadores] -= 100;
                     }
-                    */
+
+                    endwin();
 
                     clear();
 
@@ -222,7 +224,6 @@ void main()
                     }while(opcao2 != 10);
 
                     clear(); //Limpando a tela.
-
 
                 } while (marcador2 != 1);
 
