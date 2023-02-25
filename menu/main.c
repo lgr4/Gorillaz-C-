@@ -1,6 +1,6 @@
-#include <stdio.h>
 #include <string.h>
 #include <curses.h>
+#include <math.h>
 
 void main()
 {
@@ -11,7 +11,7 @@ void main()
 
     char continuar[2][100] = {"Continuar", "Sair"};
 
-    char difficulties[3][100] = {"Easy", "Intermediate", "Hard"}; //Criando as opções de dificuldades.
+    char difficulties[2][100] = {"Easy", "Hard"}; //Criando as opções de dificuldades.
 
     int y, x, j, opcao, opcao1, marcador = 0, marcador1 = 0, fim = 0, opcao2, marcador2 = 0;
 
@@ -57,187 +57,366 @@ void main()
         switch(marcador){
             case 0: //Jogo
 
-                mvprintw(y/2, x/2 - 11, "Digite seu nome: ");
-                scanw("%s", &jogadores[contadores]);
-                pontuacao[contadores] = 0;
+                switch(marcador1){
+                    case 0:
 
-                clear();
+                        mvprintw(y/2, x/2 - 11, "Digite seu nome: ");
+                        scanw("%s", &jogadores[contadores]);
+                        pontuacao[contadores] = 0;
 
-                do {
+                        clear();
 
-                    WINDOW * vel1win = newwin(3, 20, 0, 0); //Cria os espaços onde o usuário vai digitar as informações.
-                    refresh();
+                        do {
 
-                    box(vel1win, 0, 0);
-                    mvwprintw(vel1win, 1,2, "Velocity:");
-                    wrefresh(vel1win);
+                            WINDOW * vel1win = newwin(3, 20, 0, 0); //Cria os espaços onde o usuário vai digitar as informações.
+                            refresh();
 
-                    WINDOW * ang1win = newwin(3, 15, 0, 22);
-                    refresh();
+                            box(vel1win, 0, 0);
+                            mvwprintw(vel1win, 1,2, "Velocity:");
+                            wrefresh(vel1win);
 
-                    box(ang1win, 0, 0);
-                    mvwprintw(ang1win, 1,2, "Angle:");
-                    wrefresh(ang1win);
+                            WINDOW * ang1win = newwin(3, 15, 0, 22);
+                            refresh();
 
-                    mvprintw(1, x/2 - strlen("Points")/2, "Points: %d", pontuacao[contadores]);
+                            box(ang1win, 0, 0);
+                            mvwprintw(ang1win, 1,2, "Angle:");
+                            wrefresh(ang1win);
 
-                    WINDOW * ang2win = newwin(3, 15, 0, x-15);
-                    refresh();
+                            mvprintw(1, x/2 - strlen("Points")/2, "Points: %d", pontuacao[contadores]);
 
-                    box(ang2win, 0, 0);
-                    mvwprintw(ang2win, 1,2, "Angle:");
-                    wrefresh(ang2win);
+                            WINDOW * ang2win = newwin(3, 15, 0, x-15);
+                            refresh();
 
-                    WINDOW * vel2win = newwin(3, 20, 0, x-38);
-                    refresh();
+                            box(ang2win, 0, 0);
+                            mvwprintw(ang2win, 1,2, "Angle:");
+                            wrefresh(ang2win);
 
-                    box(vel2win, 0, 0);
-                    mvwprintw(vel2win, 1,2, "Velocity:");
-                    wrefresh(vel2win);
+                            WINDOW * vel2win = newwin(3, 20, 0, x-38);
+                            refresh();
 
-                    //Solicita as informações ao usuário.
-                    int vel1, ang1, vel2, ang2;
+                            box(vel2win, 0, 0);
+                            mvwprintw(vel2win, 1,2, "Velocity:");
+                            wrefresh(vel2win);
 
-                    mvwscanw(vel1win, 1,12, "%d", &vel1);
-                    mvwscanw(ang1win, 1, 9, "%d", &ang1);
-                    mvwscanw(vel2win, 1,12, "%d", &vel2);
-                    mvwscanw(ang2win, 1, 9, "%d", &ang2);
+                            WINDOW * facilwin = newwin(y-3, x, 3, 0);
+                            refresh();
 
-                    float rad1, rad2;
+                            box(facilwin, 0, 0);
 
-                    rad1 = (3.1415*ang1)/180;
-                    rad2 = (3.1415*ang2)/180;
+                            mvwprintw(facilwin, y/2 + 10, 3, "%c", macaco);
+                            mvwprintw(facilwin, y/2 + 10, x-4, "%c", macaco);
 
-                    clear();
-
-                    //Jogo:
-
-                    /*
-
-                    switch (marcador1) {
-                        case 1: //Dificuldade fácil:
-                    }
-
-                    */
-
-                    //O codigo do jogo a seguir deve ser colocado em cada switch: case 1 = nivel facil, case 2 = medio, ...
-
-                    WINDOW * jogowin = newwin(y, x, 0, 0);
-                    refresh();
-
-                    do{
+                            mvwprintw(facilwin, y/2 + 9, 4, "B");
+                            mvwprintw(facilwin, y/2 + 9, x - 5, "B");
 
 
-                        x1 = 4 + floor(t*vel1*cos(rad1));
-                        y1 = y/2 + 9 - floor(t*vel1*cos(rad1)/2) + floor(3*t*t/2);
+                            wrefresh(facilwin);
 
-                        box(jogowin, 0, 0);
+                            //Solicita as informações ao usuário.
+                            int vel1, ang1, vel2, ang2;
 
-                        mvwprintw(jogowin, y/2 + 10, 3, "%c", macaco);
-                        mvwprintw(jogowin, y/2 + 10, x-4, "%c", macaco);
+                            mvwscanw(vel1win, 1,12, "%d", &vel1);
+                            mvwscanw(ang1win, 1, 9, "%d", &ang1);
+                            mvwscanw(vel2win, 1,12, "%d", &vel2);
+                            mvwscanw(ang2win, 1, 9, "%d", &ang2);
 
-                        mvwprintw(jogowin, y1, x1, "B");
-                        mvwprintw(jogowin, y/2 + 9, x - 5, "B");
+                            float rad1, rad2;
 
-                        wrefresh(jogowin);
+                            rad1 = (3.1415*ang1)/180;
+                            rad2 = (3.1415*ang2)/180;
 
-                        sleep(1);
+                            clear();
 
+                            WINDOW * jogowin = newwin(y, x, 0, 0);
+                            refresh();
 
-                        if (x1 >= x-4 || y1 > y){
-                            t = 0;
-                            break;
-                        }
-
-                        t++;
-
-                        wclear(jogowin);
-
-                    } while(true);
-
-                    if(x1 == x - 5 && y1 == y/2 +10){
-                        pontuacao[contadores] += 100;
-                    } else if (x1 == x - 6 && y1 == y/2 +9){
-                        pontuacao[contadores] += 100;
-                    }
-
-                    do{
-
-                        x2 = x - 5 - floor(t*vel2*cos(rad2));
-                        y2 = y/2 + 9 - floor(t*vel2*cos(rad2)/2) + floor(3*t*t/2);
-
-                        box(jogowin, 0, 0);
-
-                        mvwprintw(jogowin, y/2 + 10, 3, "%c", macaco);
-                        mvwprintw(jogowin, y/2 + 10, x-4, "%c", macaco);
-
-                        mvwprintw(jogowin, y/2 + 9, 4, "B");
-                        mvwprintw(jogowin, y2, x2, "B");
-
-                        wrefresh(jogowin);
-
-                        sleep(1);
+                            do{
 
 
-                        if (x2 <= 4 || y2 >= y){
-                            break;
-                        }
+                                x1 = 4 + floor(t*vel1*cos(rad1));
+                                y1 = y/2 + 9 - floor(t*vel1*cos(rad1)/2) + floor(3*t*t/2);
 
-                        t++;
+                                box(jogowin, 0, 0);
 
-                        wclear(jogowin);
+                                mvwprintw(jogowin, y/2 + 10, 3, "%c", macaco);
+                                mvwprintw(jogowin, y/2 + 10, x-4, "%c", macaco);
 
-                    } while(true);
+                                mvwprintw(jogowin, y1, x1, "B");
+                                mvwprintw(jogowin, y/2 + 9, x - 5, "B");
 
-                    //Pontuação do segundo lancamento:
+                                wrefresh(jogowin);
 
-                    if(x1 == 3 && y1 == y/2 +10){
-                        pontuacao[contadores] -= 100;
-                    } else if (x1 == 4 && y1 == y/2 +9) {
-                        pontuacao[contadores] -= 100;
-                    }
+                                sleep(1);
 
-                    endwin();
 
-                    clear();
+                                if (x1 >= x-4 || y1 > y){
+                                    t = 0;
+                                    break;
+                                }
 
-                    do{
-                        for(j = 0; j < 2; j++){
-                            if(j == marcador2){
-                                attron(A_REVERSE);
+                                t++;
+
+                                wclear(jogowin);
+
+                            } while(true);
+
+                            if(x1 == x - 5 && y1 == y/2 +10){
+                                pontuacao[contadores] += 100;
+                            } else if (x1 == x - 6 && y1 == y/2 +9){
+                                pontuacao[contadores] += 100;
                             }
-                            mvprintw(y/2  + j, x/2 - strlen(continuar[j])/2, "%s", continuar[j]);
-                            attroff(A_REVERSE);
-                        }
 
-                        opcao2 = getch();
+                            do{
 
-                        if (opcao2 == KEY_UP){
-                            marcador2--;
-                        } else if (opcao2 == KEY_DOWN){
-                            marcador2++;
-                        }
+                                x2 = x - 5 - floor(t*vel2*cos(rad2));
+                                y2 = y/2 + 9 - floor(t*vel2*cos(rad2)/2) + floor(3*t*t/2);
 
-                        if(marcador2 == -1){
-                            marcador2 = 1;
-                        } else if(marcador2 == 2){
-                            marcador2 = 0;
-                        }
+                                box(jogowin, 0, 0);
 
-                    }while(opcao2 != 10);
+                                mvwprintw(jogowin, y/2 + 10, 3, "%c", macaco);
+                                mvwprintw(jogowin, y/2 + 10, x-4, "%c", macaco);
 
-                    clear(); //Limpando a tela.
+                                mvwprintw(jogowin, y/2 + 9, 4, "B");
+                                mvwprintw(jogowin, y2, x2, "B");
 
-                } while (marcador2 != 1);
+                                wrefresh(jogowin);
 
-                contadores++;
+                                sleep(1);
+
+
+                                if (x2 <= 4 || y2 >= y){
+                                    t = 0;
+                                    break;
+                                }
+
+                                t++;
+
+                                wclear(jogowin);
+
+                            } while(true);
+
+                            //Pontuação do segundo lancamento:
+
+                            if(x1 == 3 && y1 == y/2 +10){
+                                pontuacao[contadores] -= 100;
+                            } else if (x1 == 4 && y1 == y/2 +9) {
+                                pontuacao[contadores] -= 100;
+                            }
+
+                            endwin();
+
+                            clear();
+
+                            do{
+                                for(j = 0; j < 2; j++){
+                                    if(j == marcador2){
+                                        attron(A_REVERSE);
+                                    }
+                                    mvprintw(y/2  + j, x/2 - strlen(continuar[j])/2, "%s", continuar[j]);
+                                    attroff(A_REVERSE);
+                                }
+
+                                opcao2 = getch();
+
+                                if (opcao2 == KEY_UP){
+                                    marcador2--;
+                                } else if (opcao2 == KEY_DOWN){
+                                    marcador2++;
+                                }
+
+                                if(marcador2 == -1){
+                                    marcador2 = 1;
+                                } else if(marcador2 == 2){
+                                    marcador2 = 0;
+                                }
+
+                            }while(opcao2 != 10);
+
+                            clear(); //Limpando a tela.
+
+                        } while (marcador2 != 1);
+
+                        contadores++;
+
+                        break;
+
+                    case 1:
+
+                        mvprintw(y/2, x/2 - 11, "Digite seu nome: ");
+                        scanw("%s", &jogadores[contadores]);
+                        pontuacao[contadores] = 0;
+
+                        clear();
+
+                        do {
+
+                            WINDOW * vel1win = newwin(3, 20, 0, 0); //Cria os espaços onde o usuário vai digitar as informações.
+                            refresh();
+
+                            box(vel1win, 0, 0);
+                            mvwprintw(vel1win, 1,2, "Velocity:");
+                            wrefresh(vel1win);
+
+                            WINDOW * ang1win = newwin(3, 15, 0, 22);
+                            refresh();
+
+                            box(ang1win, 0, 0);
+                            mvwprintw(ang1win, 1,2, "Angle:");
+                            wrefresh(ang1win);
+
+                            mvprintw(1, x/2 - strlen("Points")/2, "Points: %d", pontuacao[contadores]);
+
+                            WINDOW * ang2win = newwin(3, 15, 0, x-15);
+                            refresh();
+
+                            box(ang2win, 0, 0);
+                            mvwprintw(ang2win, 1,2, "Angle:");
+                            wrefresh(ang2win);
+
+                            WINDOW * vel2win = newwin(3, 20, 0, x-38);
+                            refresh();
+
+                            box(vel2win, 0, 0);
+                            mvwprintw(vel2win, 1,2, "Velocity:");
+                            wrefresh(vel2win);
+
+                            //Solicita as informações ao usuário.
+                            int vel1, ang1, vel2, ang2;
+
+                            mvwscanw(vel1win, 1,12, "%d", &vel1);
+                            mvwscanw(ang1win, 1, 9, "%d", &ang1);
+                            mvwscanw(vel2win, 1,12, "%d", &vel2);
+                            mvwscanw(ang2win, 1, 9, "%d", &ang2);
+
+                            float rad1, rad2;
+
+                            rad1 = (3.1415*ang1)/180;
+                            rad2 = (3.1415*ang2)/180;
+
+                            clear();
+
+                            WINDOW * jogowin = newwin(y, x, 0, 0);
+                            refresh();
+
+                            do{
+
+
+                                x1 = 4 + floor(t*vel1*cos(rad1));
+                                y1 = y/2 + 9 - floor(t*vel1*cos(rad1)/2) + floor(3*t*t/2);
+
+                                box(jogowin, 0, 0);
+
+                                mvwprintw(jogowin, y/2 + 10, 3, "%c", macaco);
+                                mvwprintw(jogowin, y/2 + 10, x-4, "%c", macaco);
+
+                                mvwprintw(jogowin, y1, x1, "B");
+                                mvwprintw(jogowin, y/2 + 9, x - 5, "B");
+
+                                wrefresh(jogowin);
+
+                                sleep(1);
+
+
+                                if (x1 >= x-4 || y1 > y){
+                                    t = 0;
+                                    break;
+                                }
+
+                                t++;
+
+                                wclear(jogowin);
+
+                            } while(true);
+
+                            if(x1 == x - 5 && y1 == y/2 +10){
+                                pontuacao[contadores] += 100;
+                            } else if (x1 == x - 6 && y1 == y/2 +9){
+                                pontuacao[contadores] += 100;
+                            }
+
+                            do{
+
+                                x2 = x - 5 - floor(t*vel2*cos(rad2));
+                                y2 = y/2 + 9 - floor(t*vel2*cos(rad2)/2) + floor(3*t*t/2);
+
+                                box(jogowin, 0, 0);
+
+                                mvwprintw(jogowin, y/2 + 10, 3, "%c", macaco);
+                                mvwprintw(jogowin, y/2 + 10, x-4, "%c", macaco);
+
+                                mvwprintw(jogowin, y/2 + 9, 4, "B");
+                                mvwprintw(jogowin, y2, x2, "B");
+
+                                wrefresh(jogowin);
+
+                                sleep(1);
+
+
+                                if (x2 <= 4 || y2 >= y){
+                                    t = 0;
+                                    break;
+                                }
+
+                                t++;
+
+                                wclear(jogowin);
+
+                            } while(true);
+
+                            //Pontuação do segundo lancamento:
+
+                            if(x1 == 3 && y1 == y/2 +10){
+                                pontuacao[contadores] -= 100;
+                            } else if (x1 == 4 && y1 == y/2 +9) {
+                                pontuacao[contadores] -= 100;
+                            }
+
+                            endwin();
+
+                            clear();
+
+                            do{
+                                for(j = 0; j < 2; j++){
+                                    if(j == marcador2){
+                                        attron(A_REVERSE);
+                                    }
+                                    mvprintw(y/2  + j, x/2 - strlen(continuar[j])/2, "%s", continuar[j]);
+                                    attroff(A_REVERSE);
+                                }
+
+                                opcao2 = getch();
+
+                                if (opcao2 == KEY_UP){
+                                    marcador2--;
+                                } else if (opcao2 == KEY_DOWN){
+                                    marcador2++;
+                                }
+
+                                if(marcador2 == -1){
+                                    marcador2 = 1;
+                                } else if(marcador2 == 2){
+                                    marcador2 = 0;
+                                }
+
+                            }while(opcao2 != 10);
+
+                            clear(); //Limpando a tela.
+
+                        } while (marcador2 != 1);
+
+                        contadores++;
+
+                        break;
+                }
 
                 break;
+
+
             case 1:
                 clear();
 
                 do{
-                    for(j = 0; j < 3; j++){
+                    for(j = 0; j < 2; j++){
                         if(j == marcador1){
                             attron(A_REVERSE);
                         }
@@ -254,8 +433,8 @@ void main()
                     }
 
                     if(marcador1 == -1){
-                        marcador1 = 2;
-                    } else if(marcador1 == 3){
+                        marcador1 = 1;
+                    } else if(marcador1 == 2){
                         marcador1 = 0;
                     }
 
