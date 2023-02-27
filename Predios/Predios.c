@@ -2,7 +2,7 @@
 #include <stdio.h>
 #include <string.h>
 #include <stdbool.h>
-//#include "funcoes.h"
+#include "funcoes.h"
 
 int y, x, largura_predio,altura_predio;
 // x é a largura máxima da tela
@@ -36,22 +36,7 @@ void main(){
 
     altura_predio = 10;
 
-
-
-        //predio 1
-        do{
-        for(largura_predio = 0; largura_predio <= width_game; largura_predio++){
-            //mvprintw(linha, coluna, argumento)
-            mvprintw(altura_predio, largura_predio, "P");
-            refresh();
-
-            }
-        altura_predio+=1;
-        refresh();
-
-        }while(altura_predio<=height_game);
-
-
+    predio();
 
 
 
