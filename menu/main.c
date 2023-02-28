@@ -1,7 +1,8 @@
 #include <string.h>
 #include <curses.h>
 #include <math.h>
-
+#include "funcoes.h"
+#include <stdbool.h>
 void main()
 {
     initscr();
@@ -13,7 +14,7 @@ void main()
 
     char difficulties[2][100] = {"Easy", "Hard"}; //Criando as opções de dificuldades.
 
-    int y, x, j, opcao, opcao1, marcador = 0, marcador1 = 0, fim = 0, opcao2, marcador2 = 0;
+    int y, x, j,altura_predio, opcao, opcao1, marcador = 0, marcador1 = 0, fim = 0, opcao2, marcador2 = 0;
 
     char macaco = '@';
 
@@ -101,13 +102,29 @@ void main()
                             WINDOW * facilwin = newwin(y-3, x, 3, 0);
                             refresh();
 
+
+
                             box(facilwin, 0, 0);
+                            for(altura_predio=y/2+1; altura_predio<=y;   altura_predio+=1){
 
-                            mvwprintw(facilwin, y/2 + 10, 3, "%c", macaco);
-                            mvwprintw(facilwin, y/2 + 10, x-4, "%c", macaco);
 
-                            mvwprintw(facilwin, y/2 + 9, 4, "B");
-                            mvwprintw(facilwin, y/2 + 9, x - 5, "B");
+            mvwprintw(facilwin,altura_predio, 2, "%s", "PPPPPPPPPPPPPPPPPPPP");
+            mvwprintw(facilwin,altura_predio, 23, "%s", "PPPPPPPPPPPPPPPPPPPP");
+            mvwprintw(facilwin,altura_predio, 44, "%s", "PPPPPPPPPPPPPPPPPPPP");
+            mvwprintw(facilwin,altura_predio, 65, "%s", "PPPPPPPPPPPPPPPPPPPP");
+            mvwprintw(facilwin,altura_predio, 86, "%s", "PPPPPPPPPPPPP");
+
+            mvwprintw(facilwin,altura_predio, x-22, "%s", "PPPPPPPPPPPPPPPPPPPP");}
+
+
+
+
+
+                            mvwprintw(facilwin, y/2 + 0, 3, "%c", macaco);
+                            mvwprintw(facilwin, y/2 + 0, x-4, "%c", macaco);
+
+                            mvwprintw(facilwin, y/2 -1 , 4, "B");
+                            mvwprintw(facilwin, y/2 -1, x - 5, "B");
 
 
                             wrefresh(facilwin);
@@ -134,15 +151,32 @@ void main()
 
 
                                 x1 = 4 + floor(t*vel1*cos(rad1));
-                                y1 = y/2 + 9 - floor(t*vel1*cos(rad1)/2) + floor(3*t*t/2);
+                                y1 = y/2 -1 - floor(t*vel1*cos(rad1)/2) + floor(3*t*t/2);
 
                                 box(jogowin, 0, 0);
 
-                                mvwprintw(jogowin, y/2 + 10, 3, "%c", macaco);
-                                mvwprintw(jogowin, y/2 + 10, x-4, "%c", macaco);
+
+                                        for(altura_predio=y/2+1; altura_predio<=y;   altura_predio+=1){
+
+
+            mvwprintw(jogowin,altura_predio, 2, "%s", "PPPPPPPPPPPPPPPPPPPP");
+            mvwprintw(jogowin,altura_predio, 23, "%s", "PPPPPPPPPPPPPPPPPPPP");
+            mvwprintw(jogowin,altura_predio, 44, "%s", "PPPPPPPPPPPPPPPPPPPP");
+            mvwprintw(jogowin,altura_predio, 65, "%s", "PPPPPPPPPPPPPPPPPPPP");
+            mvwprintw(jogowin,altura_predio, 86, "%s", "PPPPPPPPPPPPP");
+
+            mvwprintw(jogowin,altura_predio, x-22, "%s", "PPPPPPPPPPPPPPPPPPPP");
+
+
+                                    };
+
+
+
+                                mvwprintw(jogowin, y/2 + 0, 3, "%c", macaco);
+                                mvwprintw(jogowin, y/2 + 0, x-4, "%c", macaco);
 
                                 mvwprintw(jogowin, y1, x1, "B");
-                                mvwprintw(jogowin, y/2 + 9, x - 5, "B");
+                                mvwprintw(jogowin, y/2 -1, x - 5, "B");
 
                                 wrefresh(jogowin);
 
@@ -169,14 +203,24 @@ void main()
                             do{
 
                                 x2 = x - 5 - floor(t*vel2*cos(rad2));
-                                y2 = y/2 + 9 - floor(t*vel2*cos(rad2)/2) + floor(3*t*t/2);
+                                y2 = y/2 -1 - floor(t*vel2*cos(rad2)/2) + floor(3*t*t/2);
 
                                 box(jogowin, 0, 0);
+                                for(altura_predio=y/2+1; altura_predio<=y;   altura_predio+=1){
 
-                                mvwprintw(jogowin, y/2 + 10, 3, "%c", macaco);
-                                mvwprintw(jogowin, y/2 + 10, x-4, "%c", macaco);
 
-                                mvwprintw(jogowin, y/2 + 9, 4, "B");
+            mvwprintw(jogowin,altura_predio, 2, "%s", "PPPPPPPPPPPPPPPPPPPP");
+            mvwprintw(jogowin,altura_predio, 23, "%s", "PPPPPPPPPPPPPPPPPPPP");
+            mvwprintw(jogowin,altura_predio, 44, "%s", "PPPPPPPPPPPPPPPPPPPP");
+            mvwprintw(jogowin,altura_predio, 65, "%s", "PPPPPPPPPPPPPPPPPPPP");
+            mvwprintw(jogowin,altura_predio, 86, "%s", "PPPPPPPPPPPPP");
+
+            mvwprintw(jogowin,altura_predio, x-22, "%s", "PPPPPPPPPPPPPPPPPPPP");}
+
+                                mvwprintw(jogowin, y/2 + 0, 3, "%c", macaco);
+                                mvwprintw(jogowin, y/2 + 0, x-4, "%c", macaco);
+
+                                mvwprintw(jogowin, y/2 -1, 4, "B");
                                 mvwprintw(jogowin, y2, x2, "B");
 
                                 wrefresh(jogowin);
@@ -306,11 +350,11 @@ void main()
 
                                 box(jogowin, 0, 0);
 
-                                mvwprintw(jogowin, y/2 + 10, 3, "%c", macaco);
-                                mvwprintw(jogowin, y/2 + 10, x-4, "%c", macaco);
+                                mvwprintw(jogowin, y/2 + 0, 3, "%c", macaco);
+                                mvwprintw(jogowin, y/2 + 0, x-4, "%c", macaco);
 
                                 mvwprintw(jogowin, y1, x1, "B");
-                                mvwprintw(jogowin, y/2 + 9, x - 5, "B");
+                                mvwprintw(jogowin, y/2 -1, x - 5, "B");
 
                                 wrefresh(jogowin);
 
@@ -328,23 +372,23 @@ void main()
 
                             } while(true);
 
-                            if(x1 == x - 5 && y1 == y/2 +10){
+                            if(x1 == x - 5 && y1 == y/2 -1){
                                 pontuacao[contadores] += 100;
-                            } else if (x1 == x - 6 && y1 == y/2 +9){
+                            } else if (x1 == x - 6 && y1 == y/2 -1){
                                 pontuacao[contadores] += 100;
                             }
 
                             do{
 
                                 x2 = x - 5 - floor(t*vel2*cos(rad2));
-                                y2 = y/2 + 9 - floor(t*vel2*cos(rad2)/2) + floor(3*t*t/2);
+                                y2 = y/2 -1 - floor(t*vel2*cos(rad2)/2) + floor(3*t*t/2);
 
                                 box(jogowin, 0, 0);
 
-                                mvwprintw(jogowin, y/2 + 10, 3, "%c", macaco);
-                                mvwprintw(jogowin, y/2 + 10, x-4, "%c", macaco);
+                                mvwprintw(jogowin, y/2 + 0, 3, "%c", macaco);
+                                mvwprintw(jogowin, y/2 + 0, x-4, "%c", macaco);
 
-                                mvwprintw(jogowin, y/2 + 9, 4, "B");
+                                mvwprintw(jogowin, y/2 - 1, 4, "B");
                                 mvwprintw(jogowin, y2, x2, "B");
 
                                 wrefresh(jogowin);
@@ -365,9 +409,9 @@ void main()
 
                             //Pontuação do segundo lancamento:
 
-                            if(x1 == 3 && y1 == y/2 +10){
+                            if(x1 == 3 && y1 == y/2 -1){
                                 pontuacao[contadores] -= 100;
-                            } else if (x1 == 4 && y1 == y/2 +9) {
+                            } else if (x1 == 4 && y1 == y/2 -1) {
                                 pontuacao[contadores] -= 100;
                             }
 
