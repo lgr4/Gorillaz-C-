@@ -1,7 +1,6 @@
 #include <string.h>
 #include <curses.h>
 #include <math.h>
-#include "funcoes.h"
 #include <stdbool.h>
 
 void main()
@@ -18,6 +17,8 @@ void main()
     int y, x, j,altura_predio, opcao, opcao1, marcador = 0, marcador1 = 0, fim = 0, opcao2, marcador2 = 0;
 
     char macaco = '@';
+
+    int largura_predio;
 
     char jogadores[6][100];
     int pontuacao[6];
