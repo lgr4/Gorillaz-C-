@@ -21,6 +21,7 @@ void main()
     char jogadores[6][100];
     int pontuacao[6];
     int contadores = 0;
+    int inverter;
 
     int x1,x2,y1,y2, t = 0;
 
@@ -155,20 +156,19 @@ void main()
 
                                 box(jogowin, 0, 0);
 
-
-                                        for(altura_predio=y/2+1; altura_predio<=y;   altura_predio+=1){
-
-
-            mvwprintw(jogowin,altura_predio, 2, "%s", "PPPPPPPPPPPPPPPPPPPP");
-            mvwprintw(jogowin,altura_predio, 23, "%s", "PPPPPPPPPPPPPPPPPPPP");
-            mvwprintw(jogowin,altura_predio, 44, "%s", "PPPPPPPPPPPPPPPPPPPP");
-            mvwprintw(jogowin,altura_predio, 65, "%s", "PPPPPPPPPPPPPPPPPPPP");
-            mvwprintw(jogowin,altura_predio, 86, "%s", "PPPPPPPPPPPPP");
-
-            mvwprintw(jogowin,altura_predio, x-22, "%s", "PPPPPPPPPPPPPPPPPPPP");
+                                for(altura_predio=y/2+1; altura_predio<=y;   altura_predio+=1){
 
 
-                                    };
+                                    mvwprintw(jogowin,altura_predio, 2, "%s", "PPPPPPPPPPPPPPPPPPPP");
+                                    mvwprintw(jogowin,altura_predio, 23, "%s", "PPPPPPPPPPPPPPPPPPPP");
+                                    mvwprintw(jogowin,altura_predio, 44, "%s", "PPPPPPPPPPPPPPPPPPPP");
+                                    mvwprintw(jogowin,altura_predio, 65, "%s", "PPPPPPPPPPPPPPPPPPPP");
+                                    mvwprintw(jogowin,altura_predio, 86, "%s", "PPPPPPPPPPPPP");
+
+                                    mvwprintw(jogowin,altura_predio, x-22, "%s", "PPPPPPPPPPPPPPPPPPPP");
+
+
+                                };
 
 
 
@@ -209,13 +209,15 @@ void main()
                                 for(altura_predio=y/2+1; altura_predio<=y;   altura_predio+=1){
 
 
-            mvwprintw(jogowin,altura_predio, 2, "%s", "PPPPPPPPPPPPPPPPPPPP");
-            mvwprintw(jogowin,altura_predio, 23, "%s", "PPPPPPPPPPPPPPPPPPPP");
-            mvwprintw(jogowin,altura_predio, 44, "%s", "PPPPPPPPPPPPPPPPPPPP");
-            mvwprintw(jogowin,altura_predio, 65, "%s", "PPPPPPPPPPPPPPPPPPPP");
-            mvwprintw(jogowin,altura_predio, 86, "%s", "PPPPPPPPPPPPP");
+                                    mvwprintw(jogowin,altura_predio, 2, "%s", "PPPPPPPPPPPPPPPPPPPP");
+                                    mvwprintw(jogowin,altura_predio, 23, "%s", "PPPPPPPPPPPPPPPPPPPP");
+                                    mvwprintw(jogowin,altura_predio, 44, "%s", "PPPPPPPPPPPPPPPPPPPP");
+                                    mvwprintw(jogowin,altura_predio, 65, "%s", "PPPPPPPPPPPPPPPPPPPP");
+                                    mvwprintw(jogowin,altura_predio, 86, "%s", "PPPPPPPPPPPPP");
 
-            mvwprintw(jogowin,altura_predio, x-22, "%s", "PPPPPPPPPPPPPPPPPPPP");}
+                                    mvwprintw(jogowin,altura_predio, x-22, "%s", "PPPPPPPPPPPPPPPPPPPP");
+
+                                }
 
                                 mvwprintw(jogowin, y/2 + 0, 3, "%c", macaco);
                                 mvwprintw(jogowin, y/2 + 0, x-4, "%c", macaco);
@@ -346,9 +348,21 @@ void main()
 
 
                                 x1 = 4 + floor(t*vel1*cos(rad1));
-                                y1 = y/2 + 9 - floor(t*vel1*cos(rad1)/2) + floor(3*t*t/2);
+                                y1 = y/2 - floor(t*vel1*cos(rad1)/2) + floor(3*t*t/2);
 
                                 box(jogowin, 0, 0);
+
+                                for(altura_predio=y/2+1; altura_predio<=y;   altura_predio+=1){
+
+
+                                    mvwprintw(jogowin,altura_predio, 2, "%s", "PPPPPPPPPPPPPPPPPPPP");
+                                    mvwprintw(jogowin,altura_predio, 23, "%s", "PPPPPPPPPPPPPPPPPPPP");
+                                    mvwprintw(jogowin,altura_predio, 44, "%s", "PPPPPPPPPPPPPPPPPPPP");
+                                    mvwprintw(jogowin,altura_predio, 65, "%s", "PPPPPPPPPPPPPPPPPPPP");
+                                    mvwprintw(jogowin,altura_predio, 86, "%s", "PPPPPPPPPPPPP");
+
+                                    mvwprintw(jogowin,altura_predio, x-22, "%s", "PPPPPPPPPPPPPPPPPPPP");
+                                }
 
                                 mvwprintw(jogowin, y/2 + 0, 3, "%c", macaco);
                                 mvwprintw(jogowin, y/2 + 0, x-4, "%c", macaco);
@@ -384,6 +398,20 @@ void main()
                                 y2 = y/2 -1 - floor(t*vel2*cos(rad2)/2) + floor(3*t*t/2);
 
                                 box(jogowin, 0, 0);
+
+                                for(altura_predio=y/2+1; altura_predio<=y;   altura_predio+=1){
+
+
+                                    mvwprintw(jogowin,altura_predio, 2, "%s", "PPPPPPPPPPPPPPPPPPPP");
+                                    mvwprintw(jogowin,altura_predio, 23, "%s", "PPPPPPPPPPPPPPPPPPPP");
+                                    mvwprintw(jogowin,altura_predio, 44, "%s", "PPPPPPPPPPPPPPPPPPPP");
+                                    mvwprintw(jogowin,altura_predio, 65, "%s", "PPPPPPPPPPPPPPPPPPPP");
+                                    mvwprintw(jogowin,altura_predio, 86, "%s", "PPPPPPPPPPPPP");
+
+                                    mvwprintw(jogowin,altura_predio, x-22, "%s", "PPPPPPPPPPPPPPPPPPPP");
+
+                                }
+
 
                                 mvwprintw(jogowin, y/2 + 0, 3, "%c", macaco);
                                 mvwprintw(jogowin, y/2 + 0, x-4, "%c", macaco);
@@ -493,7 +521,22 @@ void main()
 
                 mvprintw(y/2 - 3, x/2 - 10, "Jogador: (...) pontos.");
 
-                //Falta montar o codigo que organiza a pontuacao em ordem decrescente.
+                if (contadores >= 1){
+
+                        int c,d,n;
+
+                    for (j = 0 ; c < contadores - 1; c++) {
+
+                        for (d = 0 ; d < n - c - 1; d++) {
+
+                          if (pontuacao[d] < pontuacao[d+1]) {
+                            inverter = pontuacao[d];
+                            pontuacao[d] = pontuacao[d+1];
+                            pontuacao[d+1] = inverter;
+                          }
+                        }
+                      }
+                  }
 
                 for(j = 0; j < contadores; j++){
                     mvprintw(y/2 - 2 + j, x/2 - 10, "%s: %d pontos.", jogadores[j], pontuacao);
