@@ -171,13 +171,18 @@ void main()
                                 box(jogowin, 0, 0);
 
                                 for(altura_predio=y/2+1; altura_predio<=y;   altura_predio+=1){
-
-
-                                    mvwprintw(jogowin,altura_predio, 2, "%s", "PPPPPPPPPPPPPPPPPPPP");
-                                    mvwprintw(jogowin,altura_predio-3, 23, "%s", "PPPPPPPPPPPPPPPPPPPP");
-                                    mvwprintw(jogowin,altura_predio-5, 44, "%s", "PPPPPPPPPPPPPPPPPPPP");
-                                    mvwprintw(jogowin,altura_predio-7, 65, "%s", "PPPPPPPPPPPPPPPPPPPP");
-                                    mvwprintw(jogowin,altura_predio-4, 86, "%s", "PPPPPPPPPPPPP");
+                                   for(largura_predio = 23; largura_predio<44; largura_predio++){
+                    mvwprintw(jogowin,altura_predio-3, largura_predio, "%s", "P");
+            }
+            for(largura_predio = 44; largura_predio<65; largura_predio++){
+                    mvwprintw(jogowin,altura_predio-5, largura_predio, "%s", "P");
+            }
+            for(largura_predio = 65; largura_predio<86; largura_predio++){
+                    mvwprintw(jogowin,altura_predio-7, largura_predio, "%s", "P");
+            }
+            for(largura_predio = 86; largura_predio<x-22; largura_predio++){
+                    mvwprintw(jogowin,altura_predio-4, largura_predio, "%s", "P");
+            }
 
                                     mvwprintw(jogowin,altura_predio, x-22, "%s", "PPPPPPPPPPPPPPPPPPPP");
 
@@ -198,6 +203,10 @@ void main()
 
 
                                 if (x1 >= x-4 || y1 > y){
+                                        if (x1 == largura_predio){
+                                        insertln();
+                                break;
+                                };
                                     t = 0;
                                     break;
                                 }
@@ -223,11 +232,18 @@ void main()
                                 for(altura_predio=y/2+1; altura_predio<=y;   altura_predio+=1){
 
 
-                                    mvwprintw(jogowin,altura_predio, 2, "%s", "PPPPPPPPPPPPPPPPPPPP");
-                                    mvwprintw(jogowin,altura_predio-3, 23, "%s", "PPPPPPPPPPPPPPPPPPPP");
-                                    mvwprintw(jogowin,altura_predio-5, 44, "%s", "PPPPPPPPPPPPPPPPPPPP");
-                                    mvwprintw(jogowin,altura_predio-7, 65, "%s", "PPPPPPPPPPPPPPPPPPPP");
-                                    mvwprintw(jogowin,altura_predio-4, 86, "%s", "PPPPPPPPPPPPP");
+                                   for(largura_predio = 23; largura_predio<44; largura_predio++){
+                    mvwprintw(jogowin,altura_predio-3, largura_predio, "%s", "P");
+            }
+            for(largura_predio = 44; largura_predio<65; largura_predio++){
+                    mvwprintw(jogowin,altura_predio-5, largura_predio, "%s", "P");
+            }
+            for(largura_predio = 65; largura_predio<86; largura_predio++){
+                    mvwprintw(jogowin,altura_predio-7, largura_predio, "%s", "P");
+            }
+            for(largura_predio = 86; largura_predio<x-22; largura_predio++){
+                    mvwprintw(jogowin,altura_predio-4, largura_predio, "%s", "P");
+            }
 
                                     mvwprintw(jogowin,altura_predio, x-22, "%s", "PPPPPPPPPPPPPPPPPPPP");
 
@@ -369,11 +385,18 @@ void main()
                                 for(altura_predio=y/2+1; altura_predio<=y;   altura_predio+=1){
 
 
-                                    mvwprintw(jogowin,altura_predio, 2, "%s", "PPPPPPPPPPPPPPPPPPPP");
-                                    mvwprintw(jogowin,altura_predio-3, 23, "%s", "PPPPPPPPPPPPPPPPPPPP");
-                                    mvwprintw(jogowin,altura_predio-5, 44, "%s", "PPPPPPPPPPPPPPPPPPPP");
-                                    mvwprintw(jogowin,altura_predio-7, 65, "%s", "PPPPPPPPPPPPPPPPPPPP");
-                                    mvwprintw(jogowin,altura_predio-4, 86, "%s", "PPPPPPPPPPPPP");
+                                    for(largura_predio = 23; largura_predio<44; largura_predio++){
+                    mvwprintw(jogowin,altura_predio-3, largura_predio, "%s", "P");
+            }
+            for(largura_predio = 44; largura_predio<65; largura_predio++){
+                    mvwprintw(jogowin,altura_predio-5, largura_predio, "%s", "P");
+            }
+            for(largura_predio = 65; largura_predio<86; largura_predio++){
+                    mvwprintw(jogowin,altura_predio-7, largura_predio, "%s", "P");
+            }
+            for(largura_predio = 86; largura_predio<x-22; largura_predio++){
+                    mvwprintw(jogowin,altura_predio-4, largura_predio, "%s", "P");
+            }
 
                                     mvwprintw(jogowin,altura_predio, x-22, "%s", "PPPPPPPPPPPPPPPPPPPP");
                                 }
@@ -416,11 +439,18 @@ void main()
                                 for(altura_predio=y/2+1; altura_predio<=y;   altura_predio+=1){
 
 
-                                    mvwprintw(jogowin,altura_predio, 2, "%s", "PPPPPPPPPPPPPPPPPPPP");
-                                    mvwprintw(jogowin,altura_predio-3, 23, "%s", "PPPPPPPPPPPPPPPPPPPP");
-                                    mvwprintw(jogowin,altura_predio-5, 44, "%s", "PPPPPPPPPPPPPPPPPPPP");
-                                    mvwprintw(jogowin,altura_predio-7, 65, "%s", "PPPPPPPPPPPPPPPPPPPP");
-                                    mvwprintw(jogowin,altura_predio-4, 86, "%s", "PPPPPPPPPPPPP");
+                                    for(largura_predio = 23; largura_predio<44; largura_predio++){
+                    mvwprintw(jogowin,altura_predio-3, largura_predio, "%s", "P");
+            }
+            for(largura_predio = 44; largura_predio<65; largura_predio++){
+                    mvwprintw(jogowin,altura_predio-5, largura_predio, "%s", "P");
+            }
+            for(largura_predio = 65; largura_predio<86; largura_predio++){
+                    mvwprintw(jogowin,altura_predio-7, largura_predio, "%s", "P");
+            }
+            for(largura_predio = 86; largura_predio<x-22; largura_predio++){
+                    mvwprintw(jogowin,altura_predio-4, largura_predio, "%s", "P");
+            }
 
                                     mvwprintw(jogowin,altura_predio, x-22, "%s", "PPPPPPPPPPPPPPPPPPPP");
 
