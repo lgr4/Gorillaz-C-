@@ -3,6 +3,7 @@
 #include <math.h>
 #include "funcoes.h"
 #include <stdbool.h>
+
 void main()
 {
     initscr();
@@ -21,7 +22,8 @@ void main()
     char jogadores[6][100];
     int pontuacao[6];
     int contadores = 0;
-    int inverter;
+
+    char ranking[6][100];
 
     int x1,x2,y1,y2, t = 0;
 
@@ -348,7 +350,7 @@ void main()
 
 
                                 x1 = 4 + floor(t*vel1*cos(rad1));
-                                y1 = y/2 - floor(t*vel1*cos(rad1)/2) + floor(3*t*t/2);
+                                y1 = y/2 - 1 - floor(t*vel1*cos(rad1)/2) + floor(3*t*t/2);
 
                                 box(jogowin, 0, 0);
 
@@ -523,23 +525,32 @@ void main()
 
                 if (contadores >= 1){
 
-                        int c,d,n;
+                    int c,d,n;
+
+                    int troca1;
+
+                    char troca2[100];
 
                     for (j = 0 ; c < contadores - 1; c++) {
 
                         for (d = 0 ; d < n - c - 1; d++) {
 
                           if (pontuacao[d] < pontuacao[d+1]) {
-                            inverter = pontuacao[d];
+                            troca1 = pontuacao[d];
                             pontuacao[d] = pontuacao[d+1];
-                            pontuacao[d+1] = inverter;
+                            pontuacao[d+1] = troca1;
+
+                            strcpy(troca2, jogadores[d]);
+                            strcpy(jogadores[d], jogadores[d+1]);
+                            strcpy(jogadores[d+1], troca2);
+
                           }
                         }
                       }
-                  }
+                }
 
                 for(j = 0; j < contadores; j++){
-                    mvprintw(y/2 - 2 + j, x/2 - 10, "%s: %d pontos.", jogadores[j], pontuacao);
+                    mvprintw(y/2 - 2 + j, x/2 - 10, "%s: %d pontos.", jogadores[j], pontuacao[j]);
                 }
 
                 getch();
