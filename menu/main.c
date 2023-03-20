@@ -546,7 +546,7 @@ int main()
 
                     char troca2[100];
 
-                    for (j = 0 ; c < contadores - 1; c++) {
+                    for (c = 0 ; c < contadores - 1; c++) {
                         for (d = 0 ; d < n - c - 1; d++) {
                           if (pontuacao[d] < pontuacao[d+1]) {
                             troca1 = pontuacao[d];
