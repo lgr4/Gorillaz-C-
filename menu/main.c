@@ -3,30 +3,14 @@
 #include <math.h>
 #include <stdbool.h>
 
-void main()
+int main()
 {
     initscr();
     keypad(stdscr, true); //Para o programa reconhecer as setas do teclado.
 
-    char menu[4][100] = {"Jogo", "Dificuldades", "Ranking", "Sair"}; //Criando o menu.
+    char macaco = '@', jogadores[6][100], ranking[6][100], menu[4][100] = {"Jogo", "Dificuldades", "Ranking", "Sair"}, continuar[2][100] = {"Continuar", "Sair"}, difficulties[2][100] = {"Easy", "Hard"};
 
-    char continuar[2][100] = {"Continuar", "Sair"};
-
-    char difficulties[2][100] = {"Easy", "Hard"}; //Criando as opções de dificuldades.
-
-    int y, x, j,altura_predio, opcao, opcao1, marcador = 0, marcador1 = 0, fim = 0, opcao2, marcador2 = 0;
-
-    char macaco = '@';
-
-    int largura_predio;
-
-    char jogadores[6][100];
-    int pontuacao[6];
-    int contadores = 0;
-
-    char ranking[6][100];
-
-    int x1,x2,y1,y2, t = 0;
+    int y, x, j,altura_predio, opcao, opcao1, marcador = 0, marcador1 = 0, fim = 0, opcao2, marcador2 = 0, largura_predio, contadores = 0, pontuacao[6], x1,x2,y1,y2, t = 0;
 
     getmaxyx(stdscr, y, x);
 
@@ -50,7 +34,7 @@ void main()
             }
 
             if(marcador == -1){
-                marcador = 2;
+                marcador = 3;
             } else if(marcador == 4){
                 marcador = 0;
             }
@@ -106,8 +90,6 @@ void main()
                             WINDOW * facilwin = newwin(y-3, x, 3, 0);
                             refresh();
 
-
-
                             box(facilwin, 0, 0);
                             for(altura_predio=y/2+1; altura_predio<=y-1;   altura_predio+=1){
 
@@ -129,12 +111,6 @@ void main()
             mvwprintw(facilwin,altura_predio, x-22, "%s", "PPPPPPPPPPPPPPPPPPPP");
 
             }
-
-
-
-
-
-
                             mvwprintw(facilwin, y/2 + 0, 3, "%c", macaco);
                             mvwprintw(facilwin, y/2 + 0, x-4, "%c", macaco);
 
@@ -187,10 +163,7 @@ void main()
                                     mvwprintw(jogowin,altura_predio, x-22, "%s", "PPPPPPPPPPPPPPPPPPPP");
 
 
-                                };
-
-
-
+                                }
                                 mvwprintw(jogowin, y/2 + 0, 3, "%c", macaco);
                                 mvwprintw(jogowin, y/2 + 0, x-4, "%c", macaco);
 
@@ -565,7 +538,7 @@ void main()
 
                 mvprintw(y/2 - 3, x/2 - 10, "Jogador: (...) pontos.");
 
-                if (contadores >= 1){
+                if (contadores > 1){
 
                     int c,d,n;
 
@@ -574,9 +547,7 @@ void main()
                     char troca2[100];
 
                     for (j = 0 ; c < contadores - 1; c++) {
-
                         for (d = 0 ; d < n - c - 1; d++) {
-
                           if (pontuacao[d] < pontuacao[d+1]) {
                             troca1 = pontuacao[d];
                             pontuacao[d] = pontuacao[d+1];
@@ -611,4 +582,6 @@ void main()
 
     getch();
     endwin();
+
+    return 0;
 }
