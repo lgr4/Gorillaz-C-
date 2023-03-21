@@ -14,8 +14,7 @@ int main()
 
     getmaxyx(stdscr, y, x);
 
-    do{
-
+    do{ //Menu
         do{
             for(j = 0; j < 4; j++){
                 if(j == marcador){
@@ -47,7 +46,7 @@ int main()
             case 0: //Jogo
 
                 switch(marcador1){
-                    case 0:
+                    case 0: //Fácil
 
                         mvprintw(y/2, x/2 - 11, "Digite seu nome: ");
                         scanw("%s", &jogadores[contadores]);
@@ -147,7 +146,8 @@ int main()
                                 box(jogowin, 0, 0);
 
                                 for(altura_predio=y/2+1; altura_predio<=y;   altura_predio+=1){
-                                   for(largura_predio = 23; largura_predio<44; largura_predio++){
+                                    mvwprintw(jogowin,altura_predio, 2, "%s", "PPPPPPPPPPPPPPPPPPPP");
+                                    for(largura_predio = 23; largura_predio<44; largura_predio++){
                     mvwprintw(jogowin,altura_predio-3, largura_predio, "%s", "P");
             }
             for(largura_predio = 44; largura_predio<65; largura_predio++){
@@ -203,9 +203,8 @@ int main()
 
                                 box(jogowin, 0, 0);
                                 for(altura_predio=y/2+1; altura_predio<=y;   altura_predio+=1){
-
-
-                                   for(largura_predio = 23; largura_predio<44; largura_predio++){
+                                    mvwprintw(jogowin,altura_predio, 2, "%s", "PPPPPPPPPPPPPPPPPPPP");
+                                    for(largura_predio = 23; largura_predio<44; largura_predio++){
                     mvwprintw(jogowin,altura_predio-3, largura_predio, "%s", "P");
             }
             for(largura_predio = 44; largura_predio<65; largura_predio++){
@@ -289,7 +288,7 @@ int main()
 
                         break;
 
-                    case 1:
+                    case 1: //Difícil
 
                         mvprintw(y/2, x/2 - 11, "Digite seu nome: ");
                         scanw("%s", &jogadores[contadores]);
@@ -356,7 +355,7 @@ int main()
                                 box(jogowin, 0, 0);
 
                                 for(altura_predio=y/2+1; altura_predio<=y;   altura_predio+=1){
-
+                                    mvwprintw(jogowin,altura_predio, 2, "%s", "PPPPPPPPPPPPPPPPPPPP");
 
                                     for(largura_predio = 23; largura_predio<44; largura_predio++){
                     mvwprintw(jogowin,altura_predio-3, largura_predio, "%s", "P");
@@ -410,7 +409,7 @@ int main()
                                 box(jogowin, 0, 0);
 
                                 for(altura_predio=y/2+1; altura_predio<=y;   altura_predio+=1){
-
+                                    mvwprintw(jogowin,altura_predio, 2, "%s", "PPPPPPPPPPPPPPPPPPPP");
 
                                     for(largura_predio = 23; largura_predio<44; largura_predio++){
                     mvwprintw(jogowin,altura_predio-3, largura_predio, "%s", "P");
@@ -501,7 +500,7 @@ int main()
                 break;
 
 
-            case 1:
+            case 1: //Menu de dificuldades
                 clear();
 
                 do{
@@ -533,7 +532,7 @@ int main()
 
                 break;
 
-            case 2:
+            case 2: //Ranking
                 clear();
 
                 mvprintw(y/2 - 3, x/2 - 10, "Jogador: (...) pontos.");
@@ -572,7 +571,7 @@ int main()
 
                 break;
 
-            case 3:
+            case 3: //Acaba o jogo
                 clear();
                 fim += 1;
                 break;
