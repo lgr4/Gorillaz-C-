@@ -176,7 +176,7 @@ int main()
                                 sleep(1);
 
 
-                                if (x1 >= x-4 || y1 > y){
+                                if (x1 >= x-4 || y1 > y/2){
                                         if (x1 == largura_predio){
                                         insertln();
                                 break;
@@ -233,7 +233,7 @@ int main()
                                 sleep(1);
 
 
-                                if (x2 <= 4 || y2 >= y){
+                                if (x2 <= 4 || y2 >= y/2){
                                     t = 0;
                                     break;
                                 }
@@ -385,7 +385,7 @@ int main()
                                 sleep(1);
 
 
-                                if (x1 >= x-4 || y1 > y){
+                                if (x1 >= x-4 || y1 > y/2){
                                     t = 0;
                                     break;
                                 }
@@ -441,7 +441,7 @@ int main()
                                 sleep(1);
 
 
-                                if (x2 <= 4 || y2 >= y){
+                                if (x2 <= 4 || y2 >= y/2){
                                     t = 0;
                                     break;
                                 }
