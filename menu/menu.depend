@@ -1,9 +1,8 @@
 # depslib dependency file v1.0
-1677619173 source:c:\users\lucas\onedrive\documentos\github\gorillaz-c-\menu\main.c
+1679338668 source:c:\users\lucas\onedrive\documentos\github\gorillaz-c-\menu\main.c
 	<string.h>
 	<curses.h>
 	<math.h>
-	"funcoes.h"
 	<stdbool.h>
 
 1675799391 c:\codeblocks\pdcurs33\curses.h
