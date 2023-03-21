@@ -144,6 +144,7 @@ int main()
                                 y1 = y/2 -1 - floor(t*vel1*cos(rad1)/2) + floor(3*t*t/2);
 
                                 box(jogowin, 0, 0);
+                                mvwprintw(jogowin,altura_predio, 2, "%s", "PPPPPPPPPPPPPPPPPPPP");
 
                                 for(altura_predio=y/2+1; altura_predio<=y;   altura_predio+=1){
                                     mvwprintw(jogowin,altura_predio, 2, "%s", "PPPPPPPPPPPPPPPPPPPP");
